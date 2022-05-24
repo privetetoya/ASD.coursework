@@ -10,27 +10,27 @@ struct empty_queue : public exception {
 };
 
 template <class T>
-class queue {
+class queue_el {
 private:
-	queue* next;
+	queue_el* next;
 
 	T data;
 
 public:
-	queue() {
+	queue_el() {
 		next = nullptr;
 	}
-	explicit queue(const T value) {
+	explicit queue_el(const T value) {
 		next = nullptr;
 		data = value;
 	}
-	~queue() {
+	~queue_el() {
 		next = nullptr;
 	}
 	/*
 	 * funcs allow you set new value to queue_el object properties
 	 */
-	void set_next(queue* const next_el) {
+	void set_next(queue_el* const next_el) {
 		next = next_el;
 	};
 	void set_data(T new_data) {
@@ -40,7 +40,7 @@ public:
 	/*
 	 * funcs allow you get value of queue_el object properties
 	 */
-	queue* get_next() {
+	queue_el* get_next() {
 		return next;
 	};
 	T get_data() {
@@ -59,9 +59,9 @@ public:
 template <class T>
 class queue_like {
 private:
-	queue<T>* front;
-	queue<T>* back;
-	queue<T>* temp;
+	queue_el<T>* front;
+	queue_el<T>* back;
+	queue_el<T>* temp;
 
 	size_t queue_size;
 
@@ -83,11 +83,11 @@ public:
 		queue_size = 0;
 	}
 
-	queue<T>* get_front() {
+	queue_el<T>* get_front() {
 		return front;
 	}
 
-	queue<T>* get_back() {
+	queue_el<T>* get_back() {
 		return back;
 	}
 
@@ -95,7 +95,7 @@ public:
 	 * func adds element to queue
 	 */
 	void enqueue(T data) {
-		temp = new queue<T>(data);
+		temp = new queue_el<T>(data);
 		if (queue_size == 0) {
 			front = temp;
 			back = temp;
